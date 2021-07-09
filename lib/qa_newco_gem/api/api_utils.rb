@@ -8,7 +8,6 @@ module QaNewcoGem
         require 'logger'
         require 'httparty'
         require 'rspec'
-        require 'rspec-core'
         require 'rspec-expectations'
         @logger = Logger.new($stdout)
       end
