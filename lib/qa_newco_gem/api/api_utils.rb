@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module QaNewcoGem
-    class ApiRequest
+    class ApiUtils
   
       def initialize
         require 'logger'
