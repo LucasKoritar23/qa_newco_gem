@@ -7,8 +7,6 @@ module QaNewcoGem
       def initialize
         require 'logger'
         require 'httparty'
-        require 'rspec'
-        require 'rspec-expectations'
         @logger = Logger.new($stdout)
       end
 
@@ -26,6 +24,7 @@ module QaNewcoGem
       end
 
       def verify_status_code(request, status_code)
+        require 'rspec'
         begin
             @logger.info("Verificando status_code da requisição")
             expect(request.code).to eq(status_code)
