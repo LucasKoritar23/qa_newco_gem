@@ -13,7 +13,7 @@ module QaNewcoGem
       def execute_post(params)
         @logger.info("URI: #{params[:uri]}")
         @logger.info('Realizando POST')
-        request = HTTParty.post(params)
+        request = HTTParty.post(params[:uri], params)
         @logger.info("URI Final: #{request.request.last_uri}")
         @logger.info("POST realizado \n")
         request
@@ -22,7 +22,7 @@ module QaNewcoGem
       def execute_get(params)
         @logger.info("URI: #{params[:uri]}")
         @logger.info('Realizando GET')
-        request = HTTParty.get(params)
+        request = HTTParty.get(params[:uri], params)
         @logger.info("URI Final: #{request.request.last_uri}")
         @logger.info("GET realizado \n")
         request
@@ -31,7 +31,7 @@ module QaNewcoGem
       def execute_patch(params)
         @logger.info("URI: #{params[:uri]}")
         @logger.info('Realizando PATCH')
-        request = HTTParty.patch(params)
+        request = HTTParty.patch(params[:uri], params)
         @logger.info("URI Final: #{request.request.last_uri}")
         @logger.info("PATCH realizado \n")
         request
@@ -40,7 +40,7 @@ module QaNewcoGem
       def execute_put(params)
         @logger.info("URI: #{params[:uri]}")
         @logger.info('Realizando PUT')
-        request = HTTParty.put(params)
+        request = HTTParty.put(params[:uri], params)
         @logger.info("URI Final: #{request.request.last_uri}")
         @logger.info("PUT realizado \n")
         request
@@ -49,7 +49,7 @@ module QaNewcoGem
       def execute_delete(params)
         @logger.info("URI: #{params[:uri]}")
         @logger.info('Realizando DELETE')
-        request = HTTParty.put(params)
+        request = HTTParty.put(params[:uri], params)
         @logger.info("URI Final: #{request.request.last_uri}")
         @logger.info("DELETE realizado \n")
         request
