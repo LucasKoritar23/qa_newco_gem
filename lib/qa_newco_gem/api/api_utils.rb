@@ -8,6 +8,8 @@ module QaNewcoGem
         require 'logger'
         require 'httparty'
         require 'rspec'
+        require 'rspec-core'
+        require 'rspec-expectations'
         @logger = Logger.new($stdout)
       end
 
@@ -30,7 +32,7 @@ module QaNewcoGem
             expect(request.code).to eq(status_code)
         rescue => exception
             @logger.info("Falha na comparação de status code")
-            @logger.info("Request: #{request}")
+            @logger.info("Request: #{request_parse(request)}")
             @logger.info("status code Esperado: #{status_code}")
             @logger.info("status code Recebido: #{request.code}")
             raise exception
