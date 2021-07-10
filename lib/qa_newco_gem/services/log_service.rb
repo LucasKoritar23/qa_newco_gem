@@ -10,7 +10,8 @@ module QaNewcoGem
       end
 
       def log_file(message, log = nil)
-        @logger.info(message) unless log.nil?
+        return if log != nil
+        @logger.info(message)
       end
     end
 end
