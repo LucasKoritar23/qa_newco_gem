@@ -6,18 +6,20 @@ module QaNewcoGem
   
       def initialize
         require 'httparty'
+        require 'logger'
+        @logger = Logger.new("evidence.log")
       end
 
       def request_parse(request)
         begin
-            LOGGER.info("Parseando a requisição")
+            @logger.info("Parseando a requisição")
             request.parsed_response
-            LOGGER.info("Parse realizado com sucesso")
-            LOGGER.info("Response: #{JSON.pretty_generate(request.parsed_response)}")
+            @logger.info("Parse realizado com sucesso")
+            @logger.info("Response: #{JSON.pretty_generate(request.parsed_response)}")
             return request.parsed_response
         rescue => exception
-            LOGGER.error("Falha ao retornar a requisição parseada")
-            LOGGER.error("Request: #{request}")
+            @logger.error("Falha ao retornar a requisição parseada")
+            @logger.error("Request: #{request}")
             raise exception
         end
       end
@@ -25,15 +27,15 @@ module QaNewcoGem
       def verify_status_code(request, status_code)
         require 'rspec'
         begin
-            LOGGER.info("Verificando status_code da requisição")
-            LOGGER.info("status code Esperado no Gherkin: #{status_code}")
-            LOGGER.info("status code Recebido da API: #{request.code}")
+            @logger.info("Verificando status_code da requisição")
+            @logger.info("status code Esperado no Gherkin: #{status_code}")
+            @logger.info("status code Recebido da API: #{request.code}")
             expect(request.code).to eq(status_code)
         rescue RSpec::Expectations::ExpectationNotMetError => e
-            LOGGER.error("Codes divergentes")
+            @logger.error("Codes divergentes")
             raise e
         rescue => exception
-            LOGGER.error("Falha genérica na comparação de status code")
+            @logger.error("Falha genérica na comparação de status code")
             raise exception
         end
       end

@@ -9,7 +9,4 @@ include RSpec::Matchers #config para permitir expect dentro de métodos
 
 module QaNewcoGem
   class Error < StandardError; end
-  
-  require 'logger'
-  LOGGER = Logger.new("evidence.log")
 end
