@@ -31,9 +31,12 @@ module QaNewcoGem
             @logger.info("status code Esperado: #{status_code}")
             @logger.info("status code Recebido: #{request.code}")
             expect(request.code).to eq(status_code)
-        rescue => exception
+        rescue RSpec::Expectations::ExpectationNotMetError => e
             @logger.info("Falha na comparação de status code")
             @logger.info("Request: #{request_parse(request)}")
+            raise e
+        rescue => exception
+            @logger.info("Falha na comparação de status code")
             raise exception
         end
       end
