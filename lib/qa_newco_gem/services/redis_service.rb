@@ -10,13 +10,9 @@ module QaNewcoGem
         @logger = Logger.new("evidence.log")
       end
 
-      def initialize_redis(uri, port = nil)
+      def redis_connection(uri, port = nil)
         port = 6379 if port.nil?
-        { host: uri, port: port, connect_timeout: 0.5, read_timeout: 1.0, write_timeout: 1.0 }
-      end
-  
-      def connect_redis(uri, port = nil)
-        redis_params = initialize_redis(uri, port)
+        redis_params = { host: uri, port: port, connect_timeout: 0.5, read_timeout: 1.0, write_timeout: 1.0 }
         redis = Redis.new(redis_params)
         begin
           redis.ping
@@ -29,8 +25,16 @@ module QaNewcoGem
   
         redis
       end
+
+      def check_connection(redis)
+        if redis.nil?
+          @logger.error("Conexão incorreta com o Redis")
+          return false
+        end
+      end
   
       def get_key_redis(redis, key)
+        return if check_connection(redis) == false
         @logger.info("Buscando chave #{key} no Redis")
         begin
           redis.get(key)
@@ -41,6 +45,7 @@ module QaNewcoGem
       end
   
       def set_key_redis(redis, key, value, ttl)
+        return if check_connection(redis) == false
         @logger.info("Cadastrando chave #{key} com valor: #{value} e tempo de duração: #{ttl}")
         begin
           set_redis = redis.set(key, value, ex: ttl)
