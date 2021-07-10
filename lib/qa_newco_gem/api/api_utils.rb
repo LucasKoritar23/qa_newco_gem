@@ -28,8 +28,8 @@ module QaNewcoGem
         require 'rspec'
         begin
             @logger.info("Verificando status_code da requisição")
-            @logger.info("status code Esperado: #{status_code}")
-            @logger.info("status code Recebido: #{request.code}")
+            @logger.info("status code Esperado no Gherkin: #{status_code}")
+            @logger.info("status code Recebido da API: #{request.code}")
             expect(request.code).to eq(status_code)
         rescue RSpec::Expectations::ExpectationNotMetError => e
             @logger.error("Codes divergentes")
