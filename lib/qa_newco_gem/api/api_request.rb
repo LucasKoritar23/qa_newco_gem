@@ -12,7 +12,7 @@ module QaNewcoGem
 
       def log_file(message = nil)
         @log = File.new("evidence.txt", "a")
-        @log.write("\n #{message.to_s.force_encoding("UTF-8")}") unless message.nil?
+        @log.write("\n #{message}") unless message.nil?
         @log.close
       end
   
