@@ -27,12 +27,12 @@ module QaNewcoGem
         require 'rspec'
         begin
             @logger.info("Verificando status_code da requisição")
+            @logger.info("status code Esperado: #{status_code}")
+            @logger.info("status code Recebido: #{request.code}")
             expect(request.code).to eq(status_code)
         rescue => exception
             @logger.info("Falha na comparação de status code")
             @logger.info("Request: #{request_parse(request)}")
-            @logger.info("status code Esperado: #{status_code}")
-            @logger.info("status code Recebido: #{request.code}")
             raise exception
         end
       end
