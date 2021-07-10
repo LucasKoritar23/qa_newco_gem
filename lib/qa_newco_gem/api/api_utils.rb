@@ -12,7 +12,7 @@ module QaNewcoGem
 
       def request_parse(request)
         begin
-            @logger.info("Realizando o parse da request")
+            @logger.info("Parseando a requisição")
             request.parsed_response
             @logger.info("Parse realizado com sucesso")
             @logger.info("Response: #{JSON.pretty_generate(request.parsed_response)}")
@@ -32,11 +32,10 @@ module QaNewcoGem
             @logger.info("status code Recebido: #{request.code}")
             expect(request.code).to eq(status_code)
         rescue RSpec::Expectations::ExpectationNotMetError => e
-            @logger.error("Falha na comparação de status code")
-            @logger.error("Response de erro: #{request_parse(request)}")
+            @logger.error("Codes divergentes")
             raise e
         rescue => exception
-            @logger.error("Falha na comparação de status code")
+            @logger.error("Falha genérica na comparação de status code")
             raise exception
         end
       end
