@@ -7,18 +7,11 @@ module QaNewcoGem
       def initialize
         require 'logger'
         require 'httparty'
-        @logger = Logger.new($stdout)
+        @logger = Logger.new("evidence.log")
       end
 
-      def log_file(message = nil)
-        @log = File.new("evidence.txt", "a")
-        @log.write("\n #{message}") unless message.nil?
-        @log.close
-      end
-  
       def execute_post(params)
         @logger.info("URI: #{params[:uri]}")
-        log_file(@logger.info("URI: #{params[:uri]}"))
         @logger.info('Realizando POST')
         request = HTTParty.post(params[:uri], params)
         @logger.info("URI Final: #{request.request.last_uri}")

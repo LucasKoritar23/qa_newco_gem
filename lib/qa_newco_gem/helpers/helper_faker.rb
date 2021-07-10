@@ -7,7 +7,7 @@ module QaNewcoGem
       def initialize
         require 'logger'
         require 'faker'
-        @logger = Logger.new($stdout)
+        @logger = Logger.new("evidence.log")
       end
 
       def first_name(gender = nil)

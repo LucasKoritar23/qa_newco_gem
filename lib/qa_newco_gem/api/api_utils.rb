@@ -7,7 +7,7 @@ module QaNewcoGem
       def initialize
         require 'logger'
         require 'httparty'
-        @logger = Logger.new($stdout)
+        @logger = Logger.new("evidence.log")
       end
 
       def request_parse(request)
