@@ -8,6 +8,9 @@ module QaNewcoGem
         require 'logger'
         require 'httparty'
         @logger = Logger.new("evidence.log")
+        @logger.formatter = proc { |severity, datetime, progname, msg|
+          "[QA_NEWCO_GEM][#{severity}][#{Time.now.strftime("%Y-%m-%d %H:%M:%S.%L")}]: #{msg.dump}\n"
+        }
       end
 
       def request_parse(request)
