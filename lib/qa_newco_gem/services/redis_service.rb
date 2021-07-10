@@ -21,7 +21,7 @@ module QaNewcoGem
         begin
           redis.ping
           redis
-        rescue StandardError => e
+        rescue => exception
           redis = nil
           @logger.error("Params Redis: #{JSON.pretty_generate(JSON.parse(redis_params.to_json))}")
           @logger.error("Exceção retornada do Redis: #{e.inspect} - Mensagem: #{e.message}")
@@ -34,7 +34,7 @@ module QaNewcoGem
         @logger.info("Buscando chave #{key} no Redis")
         begin
           redis.get(key)
-        rescue StandardError => e
+        rescue => exception
           @logger.error("Exceção retornada do redis ao consultar a chave: #{e}")
           nil
         end
@@ -45,7 +45,7 @@ module QaNewcoGem
         begin
           set_redis = redis.set(key, value, ex: ttl)
           @logger.info('Chave cadastrada com sucesso no redis') if set_redis == 'OK'
-        rescue StandardError => e
+        rescue => exception
           @logger.error("Exceção retornada do redis ao cadastrar a chave: #{e}")
           nil
         end
