@@ -18,8 +18,8 @@ module QaNewcoGem
             @logger.info("Response: #{JSON.pretty_generate(request.parsed_response)}")
             return request.parsed_response
         rescue => exception
-            @logger.info("Falha ao retornar a requisição parseada")
-            @logger.info("Request: #{request}")
+            @logger.error("Falha ao retornar a requisição parseada")
+            @logger.error("Request: #{request}")
             raise exception
         end
       end
@@ -32,11 +32,11 @@ module QaNewcoGem
             @logger.info("status code Recebido: #{request.code}")
             expect(request.code).to eq(status_code)
         rescue RSpec::Expectations::ExpectationNotMetError => e
-            @logger.info("Falha na comparação de status code")
-            @logger.info("Request: #{request_parse(request)}")
+            @logger.error("Falha na comparação de status code")
+            @logger.error("Response de erro: #{request_parse(request)}")
             raise e
         rescue => exception
-            @logger.info("Falha na comparação de status code")
+            @logger.error("Falha na comparação de status code")
             raise exception
         end
       end
