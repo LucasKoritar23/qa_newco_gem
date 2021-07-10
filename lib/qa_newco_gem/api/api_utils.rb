@@ -15,6 +15,7 @@ module QaNewcoGem
             @logger.info("Realizando o parse da request")
             request.parsed_response
             @logger.info("Parse realizado com sucesso")
+            @logger.info("Response: #{JSON.pretty_generate(request.parsed_response}"))
             return request.parsed_response
         rescue => exception
             @logger.info("Falha ao retornar a requisição parseada")
