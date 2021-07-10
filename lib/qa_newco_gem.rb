@@ -6,6 +6,8 @@ require_relative "qa_newco_gem/api/api_utils"
 require_relative "qa_newco_gem/helpers/helper_faker"
 
 include RSpec::Matchers #config para permitir expect dentro de métodos
+require 'logger'
+@logger = Logger.new("evidence.log")
 
 module QaNewcoGem
   class Error < StandardError; end

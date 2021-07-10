@@ -5,12 +5,7 @@ module QaNewcoGem
     class HelperFaker
   
       def initialize
-        require 'logger'
         require 'faker'
-        @logger = Logger.new("evidence.log")
-        @logger.formatter = proc { |severity, datetime, progname, msg|
-          "[QA_NEWCO_GEM][#{severity}][#{Time.now.strftime("%Y-%m-%d %H:%M:%S.%L")}]: #{msg.dump}\n"
-        }
       end
 
       def first_name(gender = nil)
