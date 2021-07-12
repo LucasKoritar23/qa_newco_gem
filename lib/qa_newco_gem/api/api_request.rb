@@ -22,11 +22,7 @@ module QaNewcoGem
       type = validate_types(type)
       @logger.info("URI: #{params[:uri]}")
       @logger.info("Realizando #{type.upcase}")
-      post = lambda { HTTParty.post(params[:uri], params) }
-      get = lambda { HTTParty.get(params[:uri], params)}
-      patch = lambda { HTTParty.patch(params[:uri], params) }
-
-      request = type.call
+      request = HTTParty.method(type).(params[:uri], params)
       @logger.info("URI Final: #{request.request.last_uri}")
       @logger.info("#{type.upcase} realizado \n")
       request
