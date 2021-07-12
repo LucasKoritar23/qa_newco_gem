@@ -78,6 +78,3 @@ module QaNewcoGem
     end
   end
 end
-
-
-QaNewcoGem::ApiRequest.new.execute_request("POST", params = {"uri": "1234"})
